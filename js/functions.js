@@ -151,12 +151,12 @@ function getIt() {
 let obj1 = {
     get: getIt,
     x: 1
-}
+};
 
 let obj2 = {
     get: getIt,
     x: 2
-}
+};
 
 console.log(obj1.get()); // в кач-ве this в ф-цию getIt передается obj1
 console.log(obj2.get()); // в кач-ве this в ф-цию getIt передается obj2

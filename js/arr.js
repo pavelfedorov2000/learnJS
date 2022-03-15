@@ -20,7 +20,7 @@ arr[3]; // undefined
 // добавим в массив элемент с индексом 10
 arr[10] = 'what?';
 // при этом будет
-arr[3-9]; // undefined
+arr[3 - 9]; // undefined
 a.length; // 11 = 10 + 1
 
 
@@ -67,7 +67,7 @@ let hey = [1, 19, 5, 52, 37, 12];
 let sort1 = hey.sort();
 alert(sortHey); // 1, 12, 19, 37, 5, 52 - не совсем то
 function compare(a, b) {
-    return a-b;
+    return a - b;
 }
 let sort2 = hey.sort(compare);
 alert(sort2); // 1, 5, 12, 19, 37, 52 - теперь все как надо
@@ -83,20 +83,20 @@ alert(arr.lastIndexOf('b')); // выводит 5
 
 // forEach
 let arr = ['a', 'b', 'c'];
-arr.forEach(function(element){
+arr.forEach(function (element) {
     alert(element);
 });
 
 // map - возвращает новый массив
 let arr1 = ['a', 'b', 'c'];
-let arr2 = arr1.map(function(item){
+let arr2 = arr1.map(function (item) {
     return item.toUpperCase();
 });
 alert(arr2); // ['A', 'B', 'C']
 
 // filter
 let arr1 = ['a', 10, 'b', 20, 'c', 30];
-let arr2 = arr1.filter(function(item){
+let arr2 = arr1.filter(function (item) {
     return typeof item == 'number'; // оставляем только числа
 });
 alert(arr2); // [10, 20, 30]
@@ -231,7 +231,7 @@ console.log(multiply());
 
 function calcPolishNotation(arr) {
     let result = 0;
-    
+
     for (let i = 0; i < arr.length; i++) {
         console.log(arr[i]);
         if (arr[i] === '+') {
@@ -276,7 +276,7 @@ console.log(calcPolishNotation([1, 2, '+', 4, '*', 3, '+']));
 function isContinuousSequence(numbers) {
 
     for (let i = 0; i < numbers.length; i++) {
-        
+
         if (numbers[i + 1] - numbers[i] == 1 && numbers[numbers.length - 1] - numbers[numbers.length - 2] == 1 && numbers.length > 1) {
             return true;
         } else {
@@ -293,9 +293,9 @@ console.log(isContinuousSequence([0])); // false
 
 function createPhoneNumber(numbers) {
     let arr1 = [];
-    let arr2= [];
+    let arr2 = [];
     let arr3 = [];
-    for(let i = 0; i < numbers.length; i++) {
+    for (let i = 0; i < numbers.length; i++) {
         if (i < 3) {
             arr1.push(numbers[i]);
             //console.log(arr1);
@@ -317,7 +317,102 @@ console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // => returns "(
 
 
 
+// Camelcase transformation
+
+function camelize(str) {
+    return str
+        .split('-') // Разбиваем строку
+        .map(
+            (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1)
+        )
+        .join('');
+
+}
+console.log(camelize("background-color")); // backgroundColor
+
+// Фильтрация по диапазону
+let arr = [5, 3, 8, 1];
+function filterRange(a, b, c) {
+    let filtered = arr.filter((item) => (item >= b && item <= c));
+    console.log(filtered);
+};
+
+filterRange(arr, 2, 4); // [3,1]
+
+
+// Фильтрация по диапазону на месте
+let arr = [5, 3, 8, 1];
+function filterRangeInPlace(arr, a, b) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < a || arr[i] > b) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+    console.log(arr);
+}
+
+filterRangeInPlace(arr, 1, 4); // [3, 1]
+
+
+// Скопировать и отсортировать массив
+let arr = ["HTML", "JavaScript", "CSS"];
+
+function copySorted(arr) {
+    return arr.slice().sort();
+}
+
+let sorted = copySorted(arr);
+console.log(sorted);
+
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+let users = [vasya, petya, masha];
+let names = users.map(item => item.name);
+console.log(names);
 
 
 
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users = [vasya, petya, masha];
+
+let usersMapped = users.map(user => ({
+    fullname: `${user.name} ${user.surname}`,
+    id: user.id,
+}));
+console.log(usersMapped);
+
+/*
+usersMapped = [
+  { fullName: "Вася Пупкин", id: 1 },
+  { fullName: "Петя Иванов", id: 2 },
+  { fullName: "Маша Петрова", id: 3 }
+]
+*/
+
+// Деструктуризация
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250,
+};
+
+function topSalary(salaries) {
+    let max = 0;
+    let maxName = null;
+    for (let [name, salary] of Object.entries(salaries)) {
+        if (max < salary) {
+            max = salary;
+            maxName = name;
+        }
+    }
+    return maxName;
+}
+
+console.log(topSalary(salaries));
 
